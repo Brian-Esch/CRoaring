@@ -76,6 +76,8 @@ bool ra_init_with_capacity(roaring_array_t *new_ra, uint32_t cap) {
     if (!new_ra) return false;
     ra_init(new_ra);
 
+    if (cap > INT32_MAX) { return false; }
+
     if(cap > 0) {
       void *bigalloc =
         malloc(cap * (sizeof(uint16_t) + sizeof(void *) + sizeof(uint8_t)));
@@ -83,8 +85,8 @@ bool ra_init_with_capacity(roaring_array_t *new_ra, uint32_t cap) {
       new_ra->containers = (void **)bigalloc;
       new_ra->keys = (uint16_t *)(new_ra->containers + cap);
       new_ra->typecodes = (uint8_t *)(new_ra->keys + cap);
-      // TODO this is a narrowing cast...
-      new_ra->allocation_size = cap;
+      // Narrowing is safe because of above check
+      new_ra->allocation_size = (int32_t)cap;
     }
     return true;
 }
