@@ -19,12 +19,6 @@ extern "C" {
 
 static_assert(std::is_nothrow_move_constructible<Roaring>::value,
         "Expected Roaring to be no except move constructable");
-static_assert(std::is_nothrow_move_constructible<RoaringSetBitForwardIterator>::value,
-        "Expected RoaringSetBitForwardIterator to be no except move constructable");
-static_assert(std::is_nothrow_move_constructible<Roaring64Map>::value,
-        "Expected Roaring64 to be no except move constructable");
-static_assert(std::is_nothrow_move_constructible<Roaring64MapSetBitForwardIterator>::value,
-              "Expected Roaring64MapSetBitForwardIterator to be no except move constructable");
 
 bool roaring_iterator_sumall(uint32_t value, void *param) {
     *(uint32_t *)param += value;
