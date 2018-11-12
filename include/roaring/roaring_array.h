@@ -51,7 +51,7 @@ roaring_array_t *ra_create(void);
 bool ra_init_with_capacity(roaring_array_t *new_ra, uint32_t cap);
 
 /**
- * Initialize with default capacity
+ * Initialize with zero capacity
  */
 void ra_init(roaring_array_t *t);
 
