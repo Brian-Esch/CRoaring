@@ -176,7 +176,7 @@ class Roaring {
      * Moves the content of the provided bitmap, and
      * discard the current content.
      */
-    Roaring &operator=(Roaring &&r) {
+    Roaring &operator=(Roaring &&r) noexcept {
         ra_clear(&roaring.high_low_container);
         roaring = std::move(r.roaring);
         r.roaring.copy_on_write = false;
@@ -710,16 +710,6 @@ class RoaringSetBitForwardIterator final {
             roaring_init_iterator(&parent.roaring, &i);
         }
     }
-
-    RoaringSetBitForwardIterator &operator=(
-        const RoaringSetBitForwardIterator &o) = default;
-    RoaringSetBitForwardIterator &operator=(RoaringSetBitForwardIterator &&o) =
-        default;
-
-    ~RoaringSetBitForwardIterator() = default;
-
-    RoaringSetBitForwardIterator(const RoaringSetBitForwardIterator &o)
-        : i(o.i) {}
 
     roaring_uint32_iterator_t i;
 };
